@@ -12,9 +12,21 @@
 
 <h1>Search Post Here!</h1>
 
-<form action="{% url 'Search_Results' %}" method="get">
-    <input name="q" type="text" placeholder="Search...">
-</form>
+{% if myForm.errors %}
+
+<p style="color: red;"> The data it's wrong, please review</p>
+
+{% endif %}
+
+<form action="{% url 'Search_Post' %}" method="GET">{% csrf_token %}
+
+    
+    <table>
+
+        {{ myForm.as_table }}
+
+
+    </table>
 
 <h2 >{{ mesage }}</h2>
 

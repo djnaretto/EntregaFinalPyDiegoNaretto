@@ -10,7 +10,6 @@ class PostForm(forms.Form):
     author = forms.CharField()
     text = forms.CharField()
 
-
 class UserRegisterForm(UserCreationForm):
     email=forms.EmailField()
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -34,5 +33,7 @@ class UserEditForm(UserCreationForm):
         fields = [ 'email', 'password1', 'password2', 'first_name', 'last_name']
         help_texts = {k:"" for k in fields}
 
+class SearchPostForm(forms.Form):
+    query= forms.CharField(label='Search')
 class AvatarForm(forms.Form):
     image= forms.ImageField(label="Image")

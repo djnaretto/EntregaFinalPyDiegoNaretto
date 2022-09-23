@@ -1,3 +1,4 @@
+from ast import keyword
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
@@ -11,19 +12,16 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'AppCoder/home.html')
-
 @login_required 
 def post(request):
 
       if request.method == 'POST':
 
-            myForm = PostForm(request.POST) #aquí mellega toda la información del html
+            myForm = PostForm(request.POST) 
 
             print(myForm)
 
-            if myForm.is_valid:   #Si pasó la validación de Django
+            if myForm.is_valid:   
 
                   information = myForm.cleaned_data
 
@@ -32,39 +30,39 @@ def post(request):
 
                   post.save()
 
-                  return render(request, "AppCoder/add_post.html") #Vuelvo al inicio o a donde quieran
+                  return render(request, "AppCoder/add_post.html") 
 
       else: 
 
-            myForm= PostForm() #Formulario vacio para construir el html
+            myForm= PostForm()
 
       return render(request, "AppCoder/add_post.html", {"myForm":myForm})
 
 def inicio(request):
-      bienvenido = "Bienvenido"
-      return render(request, "AppCoder/inicio.html", {"Bienvenido":bienvenido})
+      welcome = "Welcome"
+      return render(request, "AppCoder/inicio.html", {"Welcome":welcome})
 
-class SearchResultsView(ListView):
-    model = Post
-    template_name = "search_results.html"
+def search_Post(request):
 
-    def get_queryset(self):  # new
-        query = self.request.GET.get("q")
-        object_list = Post.objects.filter(
-            Q(title__icontains=query) | Q(subtitle__icontains=query) | Q(author__icontains=query) | Q(date__icontains=query) | Q(text__icontains=query)
-        )
-        return object_list
+      if request.method == 'GET':
 
-def search(request):
-    if request.GET():
-        pst=request.GET()
-        post=Post.objects.filter(post=pst)
-        if len(post)!=0:
-            return render(request, "Appcoder/Searchresults.html", {"post":post})
-        else:
-            return render(request, "Appcoder/Searchresult.html", {"mesage": "There is no post"})
-    else:
-        return render(request, "Appcoder/searchPost.html", {"mensaje": "Didn't send data to search"})
+            myForm = SearchPostForm(request.GET) 
+
+            print(myForm)
+
+            if myForm.is_valid:   
+
+                  query = myForm.cleaned_data
+                  post = Post.objects.filter()
+                  if len(post)!=0:
+                        print(post)
+                        return render(request, "AppCoder/search_Post.html", {"post":post}) 
+                  else:
+                        return render(request, "Appcoder/search_Post.html", {"mesage": "There is no post"})
+            else:
+                  myForm= SearchPostForm()
+                  return render(request, "AppCoder/search_Post.html", {"mesage":'You didnt send data to search'})
+
 
 #----- Login, logout y registro de usuarios
 
