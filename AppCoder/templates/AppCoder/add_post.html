@@ -1,0 +1,34 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+    <h1>Form - Add Post</h1>
+    
+    {% if myForm.errors %}
+
+    <p style="color: red;"> The data it's wrong, please review</p>
+
+    {% endif %}
+
+
+    <form action="" method="POST">{% csrf_token %}
+
+        
+        <table>
+
+            {{ myForm.as_table }}
+
+
+        </table>
+
+
+        <input type="submit", value="Submit">
+
+    </form>
+
+  
+
+{% endblock %}

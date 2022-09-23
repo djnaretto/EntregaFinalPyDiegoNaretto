@@ -1,0 +1,40 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+
+{% block titulo_de_pagina %}
+<h1 class="mb-5">Search Results</h1>
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+{% if mesage %}
+<h2>{{ mesage }}</h2>
+
+{% else %}
+
+
+<h1>Search Results</h1>
+
+{% for pst in post %}
+
+<h2>{{ pst.title }}</h2>
+<h2>{{ pst.subtitle }}</h2>
+<h2>{{ pst.author }}</h2>
+<h2>{{ pst.date }}</h2>
+<h2>{{ pst.text }}</h2>
+
+--
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}
+{% block scripts %}
+
+
+
+{% endblock %}

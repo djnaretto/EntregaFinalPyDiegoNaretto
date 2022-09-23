@@ -1,0 +1,21 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+
+{% block titulo_de_pagina %}
+<h1 class="mb-5">EDIT {{ user }} USER PROFILE</h1>
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+<h1>PROFILE EDITION FORM</h1>
+<h1>{{ mesage }}</h1>
+<form action="{% url 'Edit_Profile' %}"  method="POST"> {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">SAVE CHANGES</button>
+
+</form>
+
+{% endblock %}

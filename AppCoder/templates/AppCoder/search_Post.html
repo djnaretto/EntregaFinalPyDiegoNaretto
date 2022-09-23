@@ -1,0 +1,21 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+
+{% block titulo_de_pagina %}
+<h1 class="mb-5">Search in my Blog</h1>
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+<h1>Search Post Here!</h1>
+
+<form action="{% url 'Search_Results' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+</form>
+
+<h2 >{{ mesage }}</h2>
+
+{% endblock %}
